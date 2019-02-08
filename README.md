@@ -199,8 +199,8 @@ With commander, you can easily define command option like this:
 const program = require('commander');
 
 program
-  .version('0.1.0')
-  .option('--mode <mode>', 'display mode, can be either 12h or 24h', '24h')
+  .version("0.1.0")
+  .option("--mode <mode>", "display mode, can be either 12h or 24h", "24h")
   .parse(process.argv);
 ```
 
@@ -269,8 +269,7 @@ function run() {
 
   program
     .version("1.0.0")
-    .option("--mode <mode>", "display mode, can be with either 12h
-or 24h", "24h")
+    .option("--mode <mode>", "display mode, can be with either 12h or 24h", "24h")
     .parse(process.argv);
 
   const clock = program.mode === "12h" ? rainbowClock12 : rainbowClock24;
