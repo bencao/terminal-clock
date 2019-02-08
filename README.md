@@ -10,6 +10,17 @@ For simplification purpose, we’ll build this application with Javascript and s
 
 Let’s start building.
 
+Table of Contents
+
+  * [Step 1: Preparations](#step-1-preparations)
+  * [Step 2: Build a simple app that prints current time every second](#step-2-build-a-simple-app-that-prints-current-time-every-second)
+  * [Step 3: Overwrite existing line instead of creating new lines every second](#step-3-overwrite-existing-line-instead-of-creating-new-lines-every-second)
+  * [Step 4: Beautify the UI](#step-4-beautify-the-ui)
+  * [Step 5: Add command line options](#step-5-add-command-line-options)
+  * [Step 6: Add autocomplete](#step-6-add-autocomplete)
+  * [Step 7: Pack the app as an executable (language specific)](#step-7-pack-the-app-as-an-executable-language-specific)
+  * [Closing](#closing)
+
 ## Step 1: Preparations
 
 Download and install [Node.js](https://nodejs.org/en/).
