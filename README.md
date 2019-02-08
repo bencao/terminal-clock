@@ -142,7 +142,7 @@ echo "\u001b[31m Hi \u001b[0m"
 
 The second thing we could do is to make those numbers look bigger. 
  
-We’ll utilize a npm package [chalk  -  npm](https://www.npmjs.com/package/chalk) to help us wrap our content in color control sequences, and another npm package [terminal-block-fonts  -  npm](https://www.npmjs.com/package/terminal-block-fonts) to help draw big numbers in terminal.
+We’ll utilize a npm package [chalk](https://www.npmjs.com/package/chalk) to help us wrap our content in color control sequences, and another npm package [terminal-block-fonts](https://www.npmjs.com/package/terminal-block-fonts) to help draw big numbers in terminal.
 
 ```shell
 # install packages
@@ -202,7 +202,7 @@ I consider this is the right timing to add command line options. Thinking of the
 2. can be used as a simple command such as `clock`
 3. support 12-hour clock if called with flag `—-mode 12h`
 
-With the above requirements, it is possible to build a program directly to handle them, but a more cost effective way is to use a “commander” library. For Node.js, the package is [commander  -  npm](https://www.npmjs.com/package/commander). Many other languages have similar commander library available.
+With the above requirements, it is possible to build a program directly to handle them, but a more cost effective way is to use a “commander” library. For Node.js, the package is [commander](https://www.npmjs.com/package/commander). Many other languages have similar commander library available.
 
 With commander, you can easily define command option like this:
 
@@ -214,6 +214,27 @@ program
   .option("--mode <mode>", "display mode, can be either 12h or 24h", "24h")
   .parse(process.argv);
 ```
+
+Due to the scope, we won’t include sub commands in the clock example, but it is pretty intuitive to implement with commander library as well:
+
+```javascript
+const git = require('commander');
+
+git
+  .command('add <files..>', 'add files to stage')
+  .option('-A, --all', 'add all files')
+  .action((files, options) => {
+    // handle git add in this block
+  });
+
+git
+  .command('commit', 'create a commit with staged files')
+  .option('-m <message>', 'commit message')
+  .action(options => {
+    // handle git commit in this block
+  });
+```
+
 
 Let’s install the commander package.
 
@@ -335,7 +356,7 @@ According to the workflow, we have 2 things in our to do list:
 1. to implement a mechanism to help our users register completion function to their shell
 2. to implement the callback that returns candidate words
 
-We’ll use addition options to add those support, and for simplification purpose, we’ll add support for bash only, but adding support other shell should be quite similar. If you’re interested in more general solutions, there’s a pretty neat solution for Node.js [omelette  -  npm](https://www.npmjs.com/package/omelette) available.
+We’ll use addition options to add those support, and for simplification purpose, we’ll add support for bash only, but adding support other shell should be quite similar. If you’re interested in more general solutions, there’s a pretty neat solution for Node.js [omelette](https://www.npmjs.com/package/omelette) available.
 
 We would make some changes to our `index.js` file:
 
@@ -453,7 +474,7 @@ Not too bad, right? But we know that compiled language such as Go can distribute
 
 The good news is that, for Node.js we can also achieve that experience! Let’s see how we can make it.
 
-The tool we are going to use is called [pkg  -  npm](https://www.npmjs.com/package/pkg). We can install it by:
+The tool we are going to use is called [pkg](https://www.npmjs.com/package/pkg). We can install it by:
 
 ```bash
 npm install -g pkg
