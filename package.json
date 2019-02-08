@@ -1,0 +1,17 @@
+{
+  "name": "clock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Cao",
+  "license": "MIT",
+  "dependencies": {
+    "ansi-escapes": "^3.2.0",
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "terminal-block-fonts": "^1.0.0"
+  }
+}
