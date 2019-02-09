@@ -1,6 +1,6 @@
 # Step by step tutorial: building a modern CLI app with animation, autocompletion and binary distribution
 
-Command line interface (CLI) development has gone a long way from the simple “HelloWorld” program we built as our very first CLI app, to modern CLI apps such as `git` and `docker` which support complex patterns such as subcommands, many CLI options and interactive outputs.
+Command line interface (CLI) development has come a long way from the simple “HelloWorld” program we built as our very first CLI app, to modern CLI apps such as `git` and `docker` which support complex patterns such as subcommands, many CLI options and interactive outputs.
 
 In this article, we would like to walk you through those modern technics for building an attractive CLI app with a concrete example - a command line clock.
 
@@ -35,7 +35,7 @@ npm init
 
 ## Step 2: Build a simple app that prints current time every second
 
-Let’s create a file named as `index.js` with the following content.
+Let’s create a file named as `index.js` with the following content:
 
 ```javascript
 // pad leading zero when necessary
@@ -104,7 +104,7 @@ Since ANSI Escape code are special invisible characters, it is better to use som
 npm install --save ansi-escapes
 ```
 
-Open index.js and do some modifications to render ANSI Escape Code.
+Open index.js and do a simple modification to render ANSI Escape Code that erase the previous output line.
 
 ```javascript
 // use npm package
@@ -113,12 +113,7 @@ const ansiEscapes = require("ansi-escapes");
 /// unchanged from the previous example
 function leftPad(number) { ... }
 function getTime() { ... }
-
-function simpleClock(time) {
-  const { hour, minute, second } = time;
-
-  return hour + ":" + minute + ":" + second;
-}
+function simpleClock(time) { ... }
 
 setInterval(() => {
   // erase 1 line before we write the time string
@@ -126,7 +121,7 @@ setInterval(() => {
 }, 1000);
 ```
 
-Run the program again with `node index.js`, and we should see the output now keeps updating the current line instead of printing into new lines, Yay!
+Run the program again with `node index.js`, we should see the output now keeps updating the current line instead of printing into new lines, Yay!
 
 ## Step 4: Beautify the UI
 
@@ -196,13 +191,13 @@ And we can run the program again with `node index.js` to see the colorful clock!
 
 Now we have a clock that shows time in 24-hour clock. Sometimes people would prefer to have a 12-hour clock instead.
 
-I consider this is the right timing to add command line options. Thinking of the right user interface first: if we’re the users, we may wish the command line to offer following conveniences:
+This is the right timing to add command line options. Thinking of the right user interface first: if we’re the users, we may wish the command line to offer those conveniences:
 
-1. print usage information if called with `—help` flag
-2. can be used as a simple command such as `clock`
-3. support 12-hour clock if called with flag `—-mode 12h`
+1. can be used as a simple command such as `clock`
+2. print usage information if called with `--help` flag
+3. support 12-hour clock if called with flag `--mode 12h`
 
-With the above requirements, it is possible to build a program directly to handle them, but a more cost effective way is to use a “commander” library. For Node.js, the package is [commander](https://www.npmjs.com/package/commander). Many other languages have similar commander library available.
+With the above requirements, it is possible to build a simple program to handle them, but a more cost effective way is to use a “commander” library. For Node.js, the package is [commander](https://www.npmjs.com/package/commander). Many other languages have similar commander library available.
 
 With commander, you can easily define command option like this:
 
@@ -234,7 +229,6 @@ git
     // handle git commit in this block
   });
 ```
-
 
 Let’s install the commander package.
 
@@ -343,11 +337,11 @@ And we can give it a try now, try those commands:  `clock`, `clock --mode 12h`, 
 
 ## Step 6: Add autocomplete
 
-Now that we have a fully working command line app, it has a few options, and for option `--mode` it has two possible option values. Adding autocomplete will definitely make it ever delightful to use. So let’s give it a try!
+Now that we have a fully working command line app, it has a few options, and for option `--mode` it has two possible option values. Adding autocomplete will definitely make the user experience even more delightful. Let’s give it a try!
 
 Autocomplete in command line works in a way as described below:
 
-1. when user presses tab key, the shell (bash or zshrc or others) first detects current command name, and check if a completion function has been defined for the given command.
+1. when a user presses tab key, the shell (bash or zshrc or others) first detects current command name, and check if a completion function has been defined for the given command.
 2. if a completion function has been found, the shell will invoke the registered callback function to get a list of candidates
 3. the shell will show candidates and if there’s only one candidate word available, the shell will automatically fill that word to the command line
 
@@ -463,14 +457,14 @@ $ clock --mode <tab>
 
 ## Step 7: Pack the app as an executable (language specific)
 
-Our clock app is done, it is so cool, and we would like to share it with our friend. But how should we distribute it?
+Our clock app is done, it is really cool, and we would like to share it with our friend. But how should we distribute it?
 
-The typical way of sharing a Node.js program is through [npm](http://npmjs.com), which is a public package registry. We can publish our app to npm, and others can use it with a few steps:
+The typical way of sharing a Node.js program is through [npm](http://npmjs.com), which is a public package registry. We can publish our app to npm, and others can get it with a few steps:
 
-1. Install Node.js runtime (since Javascript is an interpreted language)
-2. npm install -g <published-package-name>
+1. Install Node.js runtime if they don't have it yet (since Javascript is an interpreted language)
+2. npm install -g published-package-name
 
-Not too bad, right? But we know that compiled language such as Go can distribute a binary file, there’s no need to install the runtime, which is really convenient for end users.
+Not too bad, right? But we may know that compiled language such as Go can distribute a single binary file, there’s no need to install the runtime, which is really convenient for end users.
 
 The good news is that, for Node.js we can also achieve that experience! Let’s see how we can make it.
 
