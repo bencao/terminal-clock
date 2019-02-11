@@ -1,6 +1,6 @@
 # Step by step tutorial: building a modern CLI app with animation, autocompletion and binary distribution
 
-Command line interface (CLI) development has come a long way from the simple “HelloWorld” program we built as our very first CLI app, to modern CLI apps such as `git` and `docker` which support complex patterns such as subcommands, many CLI options and interactive outputs.
+Command line interface (CLI) development has come a long way from the simple “HelloWorld” program we built as our very first CLI app, to modern CLI apps such as `git` and `docker` which support complex patterns such as subcommands, many CLI options, and interactive outputs.
 
 In this article, we would like to walk you through those modern technics for building an attractive CLI app with a concrete example - a command line clock.
 
@@ -13,7 +13,7 @@ Let’s start building.
 Table of Contents
 
   * [Step 1: Preparations](#step-1-preparations)
-  * [Step 2: Build a simple app that prints current time every second](#step-2-build-a-simple-app-that-prints-current-time-every-second)
+  * [Step 2: Build a simple app that prints the current time every second](#step-2-build-a-simple-app-that-prints-the-current-time-every-second)
   * [Step 3: Overwrite existing line instead of creating new lines every second](#step-3-overwrite-existing-line-instead-of-creating-new-lines-every-second)
   * [Step 4: Beautify the UI](#step-4-beautify-the-ui)
   * [Step 5: Add command line options](#step-5-add-command-line-options)
@@ -25,7 +25,7 @@ Table of Contents
 
 Download and install [Node.js](https://nodejs.org/en/).
 
-Create a working directory named `clock` and init an empty Node.js project.
+Create a working directory named `clock` and initiate an empty Node.js project.
 
 ```shell
 mkdir clock
@@ -33,7 +33,7 @@ cd clock
 npm init
 ```
 
-## Step 2: Build a simple app that prints current time every second
+## Step 2: Build a simple app that prints the current time every second
 
 Let’s create a file named as `index.js` with the following content:
 
@@ -85,7 +85,7 @@ $ node index.js
 
 I bet you have seen command line progress bar before. It looks cool, isn’t it? But how does it actually work?
 
-The magic spell is called [ANSI Escape Code](https://en.wikipedia.org/wiki/ANSI_escape_code). ANSI Escape Code defines invisible special character sequences to represent display control commands, for example “Erase current line” or “Clear screen”. Since CLI apps are typically running in text terminals which support ANSI Escape Code, for the following sequences
+The magic spell is called the [ANSI Escape Code](https://en.wikipedia.org/wiki/ANSI_escape_code). The ANSI Escape Code defines invisible special character sequences to represent display control commands, for example, “Erase current line” or “Clear screen”. Since CLI apps are typically running in text terminals which support the ANSI Escape Code, for the following sequences
 
 ```javascript
 ==>
@@ -97,14 +97,14 @@ The magic spell is called [ANSI Escape Code](https://en.wikipedia.org/wiki/ANSI_
 
 If we play the sequence slowly we could see an animation effect that the progress bar is slowly moving.
 
-Since ANSI Escape code are special invisible characters, it is better to use some type of dictionaries instead of hard code them directly in the program. For Node.js, there’s an npm package called [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) which provides an easy to use interface for CLI developers.
+Since ANSI Escape codes are special invisible characters, it is better to use some type of dictionaries instead of hard code them directly in the program. For Node.js, there’s an npm package called [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) which provides an easy to use interface for CLI developers.
 
 ```shell
 # install package
 npm install --save ansi-escapes
 ```
 
-Open index.js and do a simple modification to render ANSI Escape Code that erase the previous output line.
+Open index.js and make a simple modification to render an ANSI Escape Code that erases the previous output line.
 
 ```javascript
 // use npm package
@@ -131,12 +131,12 @@ The first thing we would do is to add some colors to the output. Similar to “e
 
 ```shell
 # the starting sequence for red is \u001b[31m
-# and reset sequence is \u001b[0m
+# and the reset sequence is \u001b[0m
 echo "\u001b[31m Hi \u001b[0m"
 ```
 
-The second thing we could do is to make those numbers look bigger. 
- 
+The second thing we could do is to make those numbers look bigger.
+
 We’ll utilize a npm package [chalk](https://www.npmjs.com/package/chalk) to help us wrap our content in color control sequences, and another npm package [terminal-block-fonts](https://www.npmjs.com/package/terminal-block-fonts) to help draw big numbers in terminal.
 
 ```shell
@@ -145,7 +145,7 @@ npm install --save chalk
 npm install --save terminal-block-fonts
 ```
 
-And we’ll add a new function rainbowClock to our `index.js` :
+And we’ll add a new rainbowClock function to `index.js`:
 
 ```javascript
 const ansiEscapes = require("ansi-escapes");
@@ -189,20 +189,20 @@ And we can run the program again with `node index.js` to see the colorful clock!
 
 ## Step 5: Add command line options
 
-Now we have a clock that shows time in 24-hour clock. Sometimes people would prefer to have a 12-hour clock instead.
+Now we have a clock that shows time in the 24-hour clock. Sometimes people would prefer to have the 12-hour clock instead.
 
 This is the right timing to add command line options. Thinking of the right user interface first: if we’re the users, we may wish the command line to offer those conveniences:
 
 1. can be used as a simple command such as `clock`
 2. print usage information if called with `--help` flag
-3. support 12-hour clock if called with flag `--mode 12h`
+3. support 12-hour clock if called with the flag `--mode 12h`
 
-With the above requirements, it is possible to build a simple program to handle them, but a more cost effective way is to use a “commander” library. For Node.js, the package is [commander](https://www.npmjs.com/package/commander). Many other languages have similar commander library available.
+With the above requirements, it is possible to build a simple program to handle them, but a more cost-effective way is to use a “commander” library. For Node.js, the package is [commander](https://www.npmjs.com/package/commander). Many other languages have similar commander library available.
 
-With commander, you can easily define command option like this:
+With commander, you can easily define command options like this:
 
 ```javascript
-const program = require('commander');
+const program = require("commander");
 
 program
   .version("0.1.0")
@@ -213,18 +213,18 @@ program
 Due to the scope, we won’t include sub commands in the clock example, but it is pretty intuitive to implement with commander library as well:
 
 ```javascript
-const git = require('commander');
+const git = require("commander");
 
 git
-  .command('add <files..>', 'add files to stage')
-  .option('-A, --all', 'add all files')
+  .command("add <files..>", "add files to stage")
+  .option("-A, --all', 'add all files")
   .action((files, options) => {
     // handle git add in this block
   });
 
 git
-  .command('commit', 'create a commit with staged files')
-  .option('-m <message>', 'commit message')
+  .command("commit", "create a commit with staged files")
+  .option("-m <message>', "commit message")
   .action(options => {
     // handle git commit in this block
   });
@@ -236,7 +236,7 @@ Let’s install the commander package.
 npm install --save commander
 ```
 
-Update our `index.js` to add support for command line options:
+Update `index.js` to add support for command line options:
 
 ```javascript
 const ansiEscapes = require("ansi-escapes");
@@ -337,20 +337,20 @@ And we can give it a try now, try those commands:  `clock`, `clock --mode 12h`, 
 
 ## Step 6: Add autocomplete
 
-Now that we have a fully working command line app, it has a few options, and for option `--mode` it has two possible option values. Adding autocomplete will definitely make the user experience even more delightful. Let’s give it a try!
+Now that we have a fully working command line app, it has a few options, and for the option `--mode` it has two possible option values. Adding autocomplete will definitely make the user experience even more delightful. Let’s give it a try!
 
 Autocomplete in command line works in a way as described below:
 
-1. when a user presses tab key, the shell (bash or zshrc or others) first detects current command name, and check if a completion function has been defined for the given command.
+1. when a user presses the tab key, the shell (bash or zsh or others) first detects current command name, and check if a completion function has been defined for the given command.
 2. if a completion function has been found, the shell will invoke the registered callback function to get a list of candidates
 3. the shell will show candidates and if there’s only one candidate word available, the shell will automatically fill that word to the command line
 
-According to the workflow, we have 2 things in our to do list:
+According to the workflow, we have 2 things in our to-do list:
 
-1. to implement a mechanism to help our users register completion function to their shell
+1. to implement a mechanism to help our users register the completion function to their shell
 2. to implement the callback that returns candidate words
 
-We’ll use addition options to add those support, and for simplification purpose, we’ll add support for bash only, but adding support other shell should be quite similar. If you’re interested in more general solutions, there’s a pretty neat solution for Node.js [omelette](https://www.npmjs.com/package/omelette) available.
+We’ll use additional command line options to add those support, and for simplification purpose, we’ll add support for bash only, but adding support other shells should be quite similar. If you’re interested in more general solutions, there’s a pretty neat solution for Node.js named [omelette](https://www.npmjs.com/package/omelette) available.
 
 We would make some changes to our `index.js` file:
 
@@ -464,9 +464,9 @@ The typical way of sharing a Node.js program is through [npm](http://npmjs.com),
 1. Install Node.js runtime if they don't have it yet (since Javascript is an interpreted language)
 2. npm install -g published-package-name
 
-Not too bad, right? But we may know that compiled language such as Go can distribute a single binary file, there’s no need to install the runtime, which is really convenient for end users.
+Not too bad, right? But we may have known that compiled languages such as Go can distribute a single binary file, there’s no need to install the runtime, which is really convenient for end users.
 
-The good news is that, for Node.js we can also achieve that experience! Let’s see how we can make it.
+The good news is that for Node.js we can also achieve that experience! Let’s see how we can make it.
 
 The tool we are going to use is called [pkg](https://www.npmjs.com/package/pkg). We can install it by:
 
@@ -509,4 +509,4 @@ That’s it. We have built a modern CLI app, with the help of some really useful
 
 For complete code, you can it checkout from http://github.com/bencao/terminal-clock.
 
-We hope you enjoyed the tutorial and learned something new from this journey. Please let us know if you find something that can make a CLI app even better!
+We hope you enjoyed the tutorial and learned something new. Please let us know if you find something that can make a CLI app even better!
