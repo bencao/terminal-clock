@@ -217,14 +217,14 @@ const git = require("commander");
 
 git
   .command("add <files..>", "add files to stage")
-  .option("-A, --all', 'add all files")
+  .option("-A, --all", "add all files")
   .action((files, options) => {
     // handle git add in this block
   });
 
 git
   .command("commit", "create a commit with staged files")
-  .option("-m <message>', "commit message")
+  .option("-m <message>", "commit message")
   .action(options => {
     // handle git commit in this block
   });
@@ -392,7 +392,6 @@ function checkAutocomplete(argv) {
       // for the 1st position we return 3 possible option names
       process.stdout.write('--mode --help --version');
     } else if (fragment === 2) {
-      // for the 2nd position we return 3 possible candidates
       const prevWord = argv[4];
 
       // line is the exact text users see from the command line
@@ -400,6 +399,7 @@ function checkAutocomplete(argv) {
       // which can be very useful for more complex autocompletion cases
       // const line = argv[5];
 
+      // for the 2nd position we return 2 possible candidates if the first word is --mode
       if (prevWord === "--mode") {
         process.stdout.write('12h 24h');
       }
@@ -507,6 +507,6 @@ Options:
 
 That’s it. We have built a modern CLI app, with the help of some really useful libraries, it is not that hard, isn’t it? Even though the tutorial is built in Node.js, for other languages, those technics should also be applicable.
 
-For complete code, you can it checkout from http://github.com/bencao/terminal-clock.
+For complete code, you can checkout it from http://github.com/bencao/terminal-clock.
 
 We hope you enjoyed the tutorial and learned something new. Please let us know if you find something that can make a CLI app even better!
